@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { TitleContext } from "../App";
+import { StateContext } from "../App";
+
 
 const Container = styled.div`
 	max-width: 100%;
-  padding: 0 20px;
+  padding: 15px 20px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -20,6 +21,7 @@ const SearchBar = styled.div`
 	text-align: right;
 `;
 const SearchInput = styled.input`
+	width: 35%;
   border: none;
   padding: 8px;
   font-size: 14px;
@@ -27,7 +29,7 @@ const SearchInput = styled.input`
 `;
 
 const Navbar = () => {
-  const [searchTitle, setSearchTitle] = useContext(TitleContext);
+  const {searchTitle, setSearchTitle} = useContext(StateContext);
 
   
 	return (
@@ -36,7 +38,7 @@ const Navbar = () => {
 				<h3>Movies Kingdom</h3>
 			</Logo>
 			<SearchBar>
-				<SearchInput type="text" placeholder="search..." onChange={(e)=> setSearchTitle(e.target.value)}/>
+				<SearchInput type="text" placeholder="search..." onChange={(e)=> (setSearchTitle(e.target.value))}/>
 			</SearchBar>
 		</Container>
 	);
