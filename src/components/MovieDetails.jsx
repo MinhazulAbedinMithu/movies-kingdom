@@ -26,12 +26,12 @@ const MovieDetails = ({ id, showDetails, setShowDetails }) => {
 
   const url = `https://api.themoviedb.org/3/movie/${id}?api_key=4275cf25831de3b150d6ae572b31a179`;
 
-  useEffect(() => {
-    fetch(url)
-    .then(res => res.json())
-    .then(data => console.log(data))
+  // useEffect(() => {
+  //   fetch(url)
+  //   .then(res => res.json())
+  //   .then(data => console.log(data))
 
-  }, [])
+  // }, [])
 
 	return (
 		<>

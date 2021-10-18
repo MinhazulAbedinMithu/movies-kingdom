@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { StateContext } from "../App";
 import MovieDetails from "./MovieDetails";
-import Temp from "./Temp";
 
 const Container = styled.div`
 	display: inline-block;
@@ -64,7 +63,7 @@ const Movie = ({ movie }) => {
 					<Rating>{vote_average}</Rating>
 				</ContBox>
 			</Container>
-			<Temp showDetails={showDetails} setShowDetails={setShowDetails} id={id} />
+			<MovieDetails showDetails={showDetails} setShowDetails={setShowDetails} id={id} />
 		</>
 	);
 };
