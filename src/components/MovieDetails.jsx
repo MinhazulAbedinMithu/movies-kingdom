@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { GiCrossedBones } from "react-icons/gi";
 
 const Container = styled.div`
 	position: fixed;
@@ -7,39 +8,131 @@ const Container = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
-	cursor: default;
 	background: rgba(0, 0, 0, 0.8);
-	/* display: ${(props) => (props.showDetails ? "block" : "none")}; */
 	z-index: 22;
 `;
+
+const Button = styled.button`
+	position: fixed;
+	top: 4%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 0px solid transparent;
+	padding: 10px;
+	background-color: #00950d;
+	border-radius: 50%;
+	cursor: pointer;
+	& :hover {
+		transition: all 0.5s ease-out;
+		transform: rotate(360deg);
+	}
+`;
+const CrossIcon = styled(GiCrossedBones)`
+	font-size: 30px;
+	color: red;
+`;
+
 const Modal = styled.div`
 	position: fixed;
 	background: gray;
 	width: 80%;
-	height: 90vh;
+	height: 80%;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 `;
 
+const Wrapper = styled.div`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+`;
+const ImgBox = styled.div`
+	flex: 1;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+`;
+const Img = styled.img`
+	width: 100%;
+	height: 100%;
+`;
+const InfoBox = styled.div`
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: space-between;
+	padding: 20px 40px;
+`;
+const Title = styled.h1``;
+const Tagline = styled.h3``;
+const InnerSection = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 0;
+
+	& span{
+		flex: 1;
+	}
+`;
+const Overview = styled.p``;
+
 const MovieDetails = ({ id, showDetails, setShowDetails }) => {
+	const [movieDetails, setMovieDetails] = useState({});
+	const {
+		title,
+		tagline,
+		vote_average,
+		runtime,
+		budget,
+		release_date,
+		genres,
+		overview,
+		poster_path,
+	} = movieDetails;
+	console.log(movieDetails);
 
-  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=4275cf25831de3b150d6ae572b31a179`;
+	const url = `https://api.themoviedb.org/3/movie/${id}?api_key=4275cf25831de3b150d6ae572b31a179`;
 
-  // useEffect(() => {
-  //   fetch(url)
-  //   .then(res => res.json())
-  //   .then(data => console.log(data))
-
-  // }, [])
+	useEffect(() => {
+		fetch(url)
+			.then((res) => res.json())
+			.then((data) => setMovieDetails(data));
+	}, []);
 
 	return (
 		<>
 			{showDetails ? (
-				<Container showDetails={showDetails}>
+				<Container>
+					<Button onClick={() => setShowDetails(showDetails.false)}>
+						<CrossIcon />
+					</Button>
 					<Modal>
-						<h2>Modals show & hide</h2>
-						<button onClick={() => setShowDetails(false)}>close</button>
+						<Wrapper>
+							<ImgBox>
+								<Img
+									src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+									alt="movie poster"
+								/>
+							</ImgBox>
+							<InfoBox>
+								<Title>{title}</Title>
+								<Tagline>{tagline}</Tagline>
+								<InnerSection>
+									<span><b>Rating</b>: {vote_average}</span>
+									<span>
+										<b>Runtime</b>: {Math.floor(runtime / 60)}hr {runtime % 60}min
+									</span>
+								</InnerSection>
+								<InnerSection>
+									<span><b>Budget</b>: {budget}</span>
+									<span><b>Release</b>: {release_date}</span>
+								</InnerSection>
+								<Overview>{overview}</Overview>
+							</InfoBox>
+						</Wrapper>
 					</Modal>
 				</Container>
 			) : null}

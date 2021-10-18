@@ -9,88 +9,132 @@ const Container = styled.div`
 	margin: 0 auto;
 `;
 const WrapperTop = styled.div`
-  display: flex;
+	display: flex;
 	flex-wrap: wrap;
 `;
-const WrapperBottom = styled.div``;
-const PaginationBox = styled.div``;
-const Pagination = styled.div``;
-const PaginationItem = styled.div``;
-const InputBox = styled.div``;
-const InputField = styled.input``;
-const Button = styled.button``;
+const WrapperBottom = styled.div`
+	margin-top: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+const PaginationBox = styled.div`
+	margin-top: 50px; ;
+`;
+const Pagination = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+`;
+const PaginationItem = styled.div`
+	padding: 5px;
+`;
+const InputBox = styled.div`
+	background-color: #CAFFFB;
+	width: 100%;
+	text-align: center;
+	padding: 20px 0;
+
+	& h4{
+		margin: 10px 0;
+		color: #C13CFF;
+	}
+`;
+const InputField = styled.input`
+	padding: 5px 10px;
+	font-size: 14px;
+	border: 1px solid #003E76;
+	border-radius: 8px 0 0 8px;
+`;
+const InputNumButton = styled.button`
+	padding: 5px 8px;
+	font-weight: bold;
+	border: 1px solid #003E76;
+	border-radius: 0 8px 8px 0;
+`;
+const Button = styled.button`
+	padding: 5px 8px;
+	font-weight: bold;
+	border: 1px solid #003E76;
+	border-radius: 8px;
+	background-color: ${props => props.current && "#FFF850"};
+`;
 
 const Movies = () => {
 	const { movies } = useContext(StateContext);
 	const [numMoviesInPage, setNumMoviesInPage] = useState(8);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [start, setStart] = useState(0);
 
 	const totalPages = Math.ceil(movies?.length / numMoviesInPage);
 
-	// let end = numMoviesInPage * currentPage;
-	const sliceMovies = movies.slice(numMoviesInPage*(currentPage-1), numMoviesInPage * currentPage);
+	const sliceMovies = movies.slice(
+		numMoviesInPage * (currentPage - 1),
+		numMoviesInPage * currentPage
+	);
 
 	const handleNext = () => {
-		if(currentPage < totalPages){
-			setCurrentPage(currentPage+1);
-		}else{
+		if (currentPage < totalPages) {
+			setCurrentPage(currentPage + 1);
+		} else {
 			setCurrentPage(totalPages);
 		}
-	}
+	};
 
 	const handlePrev = () => {
-		if(currentPage > 1){
-			setCurrentPage(currentPage-1);
-		}else{
+		if (currentPage > 1) {
+			setCurrentPage(currentPage - 1);
+		} else {
 			setCurrentPage(1);
 		}
-	}
+	};
 	const handleFirst = () => {
 		setCurrentPage(1);
-	}
+	};
 	const handleLast = () => {
 		setCurrentPage(totalPages);
-	}
+	};
 
-	console.log(totalPages);
-	console.log(sliceMovies);
 
 	return (
 		<Container>
+		
 			<WrapperTop>
 				{sliceMovies.map((movie) => (
 					<Movie key={movie.id} movie={movie} />
 				))}
 			</WrapperTop>
-			<WrapperBottom>
-				<InputBox>
-					<InputField
-						placeholder="8"
-						onBlur={(e) => setNumMoviesInPage(e.target.value)}
-					/>
-          <Button>Show</Button>
-				</InputBox>
-        <PaginationBox>
-          <Pagination>
-						<PaginationItem>
-							<Button onClick={handleFirst}>1</Button>
-						</PaginationItem>
-						<PaginationItem>
-							<Button onClick={handlePrev}>Prev</Button>
-						</PaginationItem>
-						<PaginationItem>
-							<Button>{currentPage}</Button>
-						</PaginationItem>
-						<PaginationItem>
-							<Button onClick={handleNext}>Next</Button>
-						</PaginationItem>
-						<PaginationItem>
-							<Button onClick={handleLast}>{totalPages}</Button>
-						</PaginationItem>
-					</Pagination>
-        </PaginationBox>
-			</WrapperBottom>
+
+			{sliceMovies.length > 0 ? (
+				<WrapperBottom>
+					<InputBox>
+					<h4>How many Movie card in a page : </h4>
+						<InputField
+							placeholder="8"
+							onBlur={(e) => setNumMoviesInPage(e.target.value)}
+						/>
+						<InputNumButton>Show</InputNumButton>
+					</InputBox>
+					<PaginationBox>
+						<Pagination>
+							<PaginationItem>
+								<Button onClick={handleFirst}>1</Button>
+							</PaginationItem>
+							<PaginationItem>
+								<Button onClick={handlePrev}>Prev</Button>
+							</PaginationItem>
+							<PaginationItem>
+								<Button current>{currentPage}</Button>
+							</PaginationItem>
+							<PaginationItem>
+								<Button onClick={handleNext}>Next</Button>
+							</PaginationItem>
+							<PaginationItem>
+								<Button onClick={handleLast}>{totalPages}</Button>
+							</PaginationItem>
+						</Pagination>
+					</PaginationBox>
+				</WrapperBottom>
+			) : null}
 		</Container>
 	);
 };

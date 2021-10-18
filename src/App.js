@@ -1,8 +1,15 @@
 import React, { createContext, useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
 import Footer from "./components/Footer";
 import Movies from "./components/Movies";
 import Navbar from "./components/Navbar";
+
+
+const MiddleBox = styled.div`
+  max-width: 1170px;
+  width: 100%;
+  margin: 0 auto;
+`;
 
 export const StateContext = createContext();
 
@@ -24,20 +31,19 @@ const App = () => {
 			.then((data) => setMovies(data.results));
 	}, [searchTitle]);
 
-
 	return (
 		<StateContext.Provider
 			value={{
 				searchTitle,
 				setSearchTitle,
-				movies
+				movies,
 			}}
 		>
-			<Router>
-				<Navbar />
+			<Navbar />
+			<MiddleBox>
 				<Movies />
-				<Footer />
-			</Router>
+			</MiddleBox>
+			<Footer />
 		</StateContext.Provider>
 	);
 };

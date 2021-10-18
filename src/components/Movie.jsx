@@ -9,7 +9,7 @@ const Container = styled.div`
 	margin: 10px;
 	flex-grow: 1;
 	width: 20%;
-	height: 50vh;
+	height: 30vh;
 	overflow: hidden;
 	border-radius: 8px;
 	box-shadow: 10px 10px 15px gray;
@@ -47,10 +47,15 @@ const Movie = ({ movie }) => {
 	const { id, title, poster_path, vote_average } = movie;
 
 	const [showDetails, setShowDetails] = useState(false);
+	// const [showId, setShowId] = useState(0);
+
+	const handleClick = (e) => {
+		setShowDetails(true);
+	};
 
 	return (
 		<>
-			<Container onClick={() => setShowDetails(true)}>
+			<Container onClick={handleClick}>
 				<ImgBox>
 					<Img
 						src={`https://image.tmdb.org/t/p/original/${poster_path}`}
@@ -63,7 +68,14 @@ const Movie = ({ movie }) => {
 					<Rating>{vote_average}</Rating>
 				</ContBox>
 			</Container>
-			<MovieDetails showDetails={showDetails} setShowDetails={setShowDetails} id={id} />
+			
+			{showDetails && (
+				<MovieDetails
+					showDetails={showDetails}
+					setShowDetails={setShowDetails}
+					id={id}
+				/>
+			)}
 		</>
 	);
 };
