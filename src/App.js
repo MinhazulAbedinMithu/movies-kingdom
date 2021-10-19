@@ -35,7 +35,7 @@ const App = () => {
 		fetch(searchUrl)
 			.then((res) => res.json())
 			.then((data) => setMovies(data.results));
-	}, [searchTitle]);
+	}, [searchUrl]);
 	console.log(movies);
 
 	return (

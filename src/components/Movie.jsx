@@ -7,7 +7,7 @@ const Container = styled.div`
 	display: inline-block;
 	overflow: hidden;
 	position: relative;
-	background: blue;
+	background: #003887;
 	margin: 10px;
 	flex-grow: 1;
 	width: 20%;
