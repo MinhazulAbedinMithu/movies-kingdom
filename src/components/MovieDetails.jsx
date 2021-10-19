@@ -21,9 +21,9 @@ const Button = styled.button`
 	transform: translate(-50%, -50%);
 	border: 0px solid transparent;
 	padding: 10px;
-	background-color: #00320C;
+	background-color: #00320c;
 	color: red;
-	
+
 	box-shadow: 0px 0px 30px #c6c600;
 	border-radius: 50%;
 	cursor: pointer;
@@ -50,13 +50,33 @@ const Modal = styled.div`
 	align-items: center;
 	padding: 20px;
 	box-sizing: border-box;
-	background: linear-gradient(rgba(180, 0, 174, 0.2), rgba(180, 0, 174, 0.3)), url(${(props) => `https://image.tmdb.org/t/p/original/${props.backdrop_path}`});
+	background: linear-gradient(rgba(180, 0, 174, 0.2), rgba(180, 0, 174, 0.3)),
+		url(${(props) =>
+			`https://image.tmdb.org/t/p/original/${props.backdrop_path}`});
 	background-blend-mode: screen;
 
-	${mobile({ width: "95%", flexDirection: 'column', background: '#F5D0FF', overflow: 'auto', padding: '5px'})}
-	${tablet({ width: "95%", flexDirection: 'column', background: '#F5D0FF', overflow: 'auto', padding: '5px'})}
-	${laptop({ width: "95%", height: '60%', flexDirection: 'row', background: '#F5D0FF', overflow: 'auto', padding: '5px'})}
-
+	${mobile({
+		width: "95%",
+		flexDirection: "column",
+		background: "#F5D0FF",
+		overflow: "auto",
+		padding: "5px",
+	})}
+	${tablet({
+		width: "95%",
+		flexDirection: "column",
+		background: "#F5D0FF",
+		overflow: "auto",
+		padding: "5px",
+	})}
+	${laptop({
+		width: "95%",
+		height: "60%",
+		flexDirection: "row",
+		background: "#F5D0FF",
+		overflow: "auto",
+		padding: "5px",
+	})}
 `;
 
 const Img = styled.img`
@@ -65,9 +85,9 @@ const Img = styled.img`
 	border-radius: 10px;
 	z-index: 22;
 	border: 2px solid white;
-	${mobile({ boxShadow: "none", width: '90%', height: '45vh' })}
-	${tablet({ boxShadow: "none", width: '90%', height: '45vh' })}
-	${laptop({ boxShadow: "none", width: '70%', height: '45vh' })}
+	${mobile({ boxShadow: "none", width: "90%", height: "45vh" })}
+	${tablet({ boxShadow: "none", width: "90%", height: "45vh" })}
+	${laptop({ boxShadow: "none", width: "70%", height: "45vh" })}
 `;
 const InfoBox = styled.div`
 	flex: 2;
@@ -82,15 +102,21 @@ const InfoBox = styled.div`
 	border-radius: 10px;
 	border: 2px solid #f9f9f9;
 	z-index: 22;
-	${mobile({ margin: '10px 0', padding: '10px 5px' })}
-	${tablet({ margin: '10px 0', padding: '10px 5px' })}
+	${mobile({ margin: "10px 0", padding: "10px 5px" })}
+	${tablet({ margin: "10px 0", padding: "10px 5px" })}
 `;
-const Title = styled.h1`
+const Title = styled.div`
 	font-size: 50px;
 	margin-bottom: 15px;
-	${mobile({ fontSize: '25px', textAlign: 'center' })}
-
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	${mobile({ fontSize: "25px", textAlign: "center", flexDirection: 'column' })}
 `;
+
+const Span = styled.span``;
+
 const Tagline = styled.h3`
 	font-weight: 400;
 `;
@@ -156,8 +182,11 @@ const MovieDetails = ({ id, showDetails, setShowDetails }) => {
 
 						<InfoBox>
 							<Title>
-								{title} <Star />
-								<Rating>{vote_average}</Rating>
+								<Span>{title}</Span>
+								<Span>
+									<Star />
+									<Rating>{vote_average}</Rating>
+								</Span>
 							</Title>
 							<Tagline>{tagline}</Tagline>
 							<Items>
