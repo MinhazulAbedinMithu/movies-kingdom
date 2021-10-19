@@ -51,8 +51,7 @@ const Modal = styled.div`
 	padding: 20px;
 	box-sizing: border-box;
 	background: linear-gradient(rgba(180, 0, 174, 0.2), rgba(180, 0, 174, 0.3)),
-		url(${(props) =>
-			`https://image.tmdb.org/t/p/original/${props.backdrop_path}`});
+		url(${(props) => `https://image.tmdb.org/t/p/original/${props.backdrop_path}`});
 	background-blend-mode: screen;
 
 	${mobile({
