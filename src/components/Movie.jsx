@@ -15,14 +15,13 @@ const Container = styled.div`
 	border-radius: 8px;
 	box-shadow: 10px 10px 15px gray;
 	cursor: pointer;
-	&:hover{
-		.cont-box{
+	&:hover {
+		.cont-box {
 			opacity: 1;
-		transition: all 0.6s ease;
-
+			transition: all 0.6s ease;
 		}
 	}
-	${mobile({ width: "100%", height: "40vh" })}
+	${mobile({ width: "100%", height: "50vh" })}
 	${tablet({ width: "45%", height: "45vh" })}
 	${laptop({ width: "30%", height: "45vh" })}
 `;
