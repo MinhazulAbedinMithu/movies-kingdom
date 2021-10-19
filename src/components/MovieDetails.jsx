@@ -138,7 +138,7 @@ const MovieDetails = ({ id, showDetails, setShowDetails }) => {
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => setMovieDetails(data));
-	}, []);
+	}, [id]);
 
 	return (
 		<>
