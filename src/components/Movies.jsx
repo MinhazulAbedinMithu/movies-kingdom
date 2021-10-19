@@ -2,25 +2,27 @@ import React, { useContext, useState } from "react";
 import { StateContext } from "../App";
 import Movie from "../components/Movie";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
 	max-width: 100%;
 	padding: 20px 50px;
 	margin: 0 auto;
+	${mobile({ padding: "20px 5px" })}
 `;
 const WrapperTop = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 `;
 const WrapperBottom = styled.div`
-	margin-top: 40px;
+	margin: 40px 0;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
+	justify-content: space-between;
+	${mobile({ flexDirection: 'column' })}
+
 `;
-const PaginationBox = styled.div`
-	margin-top: 50px; ;
-`;
+const PaginationBox = styled.div``;
 const Pagination = styled.div`
 	display: flex;
 	align-items: center;
@@ -30,34 +32,18 @@ const PaginationItem = styled.div`
 	padding: 5px;
 `;
 const InputBox = styled.div`
-	background-color: #CAFFFB;
-	width: 100%;
-	text-align: center;
-	padding: 20px 0;
-
-	& h4{
+	& h4 {
 		margin: 10px 0;
-		color: #C13CFF;
+		color: #c13cff;
 	}
 `;
-const InputField = styled.input`
-	padding: 5px 10px;
-	font-size: 14px;
-	border: 1px solid #003E76;
-	border-radius: 8px 0 0 8px;
-`;
-const InputNumButton = styled.button`
-	padding: 5px 8px;
-	font-weight: bold;
-	border: 1px solid #003E76;
-	border-radius: 0 8px 8px 0;
-`;
+
 const Button = styled.button`
 	padding: 5px 8px;
 	font-weight: bold;
-	border: 1px solid #003E76;
+	border: 1px solid #003e76;
 	border-radius: 8px;
-	background-color: ${props => props.current && "#FFF850"};
+	background-color: ${(props) => props.current && "#FFF850"};
 `;
 
 const Movies = () => {
@@ -94,10 +80,8 @@ const Movies = () => {
 		setCurrentPage(totalPages);
 	};
 
-
 	return (
 		<Container>
-		
 			<WrapperTop>
 				{sliceMovies.map((movie) => (
 					<Movie key={movie.id} movie={movie} />
@@ -107,12 +91,14 @@ const Movies = () => {
 			{sliceMovies.length > 0 ? (
 				<WrapperBottom>
 					<InputBox>
-					<h4>How many Movie card in a page : </h4>
-						<InputField
-							placeholder="8"
-							onBlur={(e) => setNumMoviesInPage(e.target.value)}
-						/>
-						<InputNumButton>Show</InputNumButton>
+						<span>How many items in a page: </span>
+						<select onChange={(e) => setNumMoviesInPage(e.target.value)}>
+							<option value="4">4</option>
+							<option value="8" selected>8</option>
+							<option value="10">10</option>
+							<option value="12">12</option>
+							<option value="16">16</option>
+						</select>
 					</InputBox>
 					<PaginationBox>
 						<Pagination>
