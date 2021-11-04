@@ -15,7 +15,7 @@ const Container = styled.div`
 const Footer = () => {
   return (
     <Container>
-      <p>Copyright &copy; Alpha Square Partners. All right reserved</p>
+      <p>Copyright &copy; Minhazul Abedin Mithu. All right reserved</p>
     </Container>
   );
 };
