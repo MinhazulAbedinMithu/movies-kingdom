@@ -76,7 +76,7 @@ const Navbar = () => {
 			<Container>
 				<Logo>
 					<h3>
-						<span>Movies</span> Kingdom
+						<Link to="/"><span>Movies</span> Kingdom </Link>
 					</h3>
 				</Logo>
 				<SearchBar>
