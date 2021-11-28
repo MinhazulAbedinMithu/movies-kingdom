@@ -1,5 +1,4 @@
 # Movies Kingdom
-### Job Task given by Alpha Square Partners
 
 ### Live URL: https://movieskingdom.netlify.app/
 
